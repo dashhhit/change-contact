@@ -1,0 +1,27 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.content{
+    font-size: 20px;
+}
+.form_token{
+    margin-top: 50px;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.token_btn{
+    padding: 3px 64px;
+    border-radius: 5px;
+    border: 1px solid;
+}
+.token-input{
+    padding-top: 2px;
+    padding-bottom: 2px;
+}

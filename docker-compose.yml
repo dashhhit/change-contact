@@ -1,0 +1,59 @@
+version: "3.9"
+
+
+services:
+  backend-golang:
+    container_name: golang-contact
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+      - DATABASE_HOST=${DB_HOST}
+      - DATABASE_PORT=${DB_PORT}
+    tty: true
+    build: ./backend-golang
+    ports:
+      - "8000:8000"
+    restart: on-failure
+    volumes:
+      - ./backend-golang
+    depends_on:
+      - postgresdb
+    networks:
+      - learning
+
+  frontend-react:
+    stdin_open: true
+    build: ./frontend-react
+    volumes:
+      - ./frontend-react
+
+    ports:
+      - "3000:3000"
+    networks:
+      - learning
+    depends_on:
+      - postgresdb
+
+  postgresdb:
+    image: postgres:latest
+    container_name: postgres_container
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+      - DATABASE_HOST=${DB_HOST}
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./pg_data:/var/lib/postgresql/data
+    networks:
+      - learning
+
+
+volumes:
+  pg_data:
+
+networks:
+  learning:
+    driver: bridge

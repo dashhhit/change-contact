@@ -1,0 +1,10 @@
+CREATE TABLE IF NOT EXISTS Tokens (
+    id SERIAL PRIMARY KEY ,
+    token VARCHAR NOT NULL UNIQUE ,
+    is_use BOOLEAN NOT NULL ,
+    count INT NOT NULL
+    );
+
+psql -h host.docker.internal -p 5432 -U spuser -d project
+
+INSERT INTO tokens VALUES ("5ddb42173b0df57e303a5e39076c6f86630491462c0663641b51c50f1186f007", false, 0);
